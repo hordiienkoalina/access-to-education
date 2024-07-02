@@ -10,11 +10,7 @@
 ```
 python3 scripts/csv_points_polygons.py [full path to access df csv]
 
-python3 scripts/gpd_to_geojson.py [full path to state csv] state
-python3 scripts/gpd_to_geojson.py [full path to municipality csv] municipality
-python3 scripts/gpd_to_geojson.py [full path to microregion csv] microregion
-python3 scripts/gpd_to_geojson.py [full path to census polygons csv] polygons
-python3 scripts/gpd_to_geojson.py [full path to census points csv] points
+python3 scripts/gpd_to_geojson.py [full path to folder containg csv files] 
 ```
 
 #### Running the App

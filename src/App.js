@@ -16,10 +16,12 @@ const App = () => {
 
   // Descriptions for each layer type
   const layerDescriptions = {
-    'Access': 'Description of the Access layer currently being shown.',
-    'Quality': 'Description of the Quality layer currently being shown.',
-    'Access-Quality': 'Description of the Quality-Adjusted Access layer currently being shown.',
-    'Population': 'Description of the Population layer currently being shown.'
+    'Access': 'Spatial access to public high-schools. Access is calculated considering supply and demand of schools, and family preferences around school distance and quality.',
+    'Quality': 'Average school quality measured by the IDEB, weighed by the access between the school and each student.',
+    'Access-Quality': 'A combination of school quality and spatial access, measuring the relative access to quality education.',
+    'Income': 'Average monthly hoursehold earnings in dollars.',
+    'Gender': 'Percentage of the population that is male.',
+    'Race': 'The majority race.',
   };
 
   return (
@@ -31,7 +33,7 @@ const App = () => {
       <div className="content">
         {/* Subheader with dynamic title and description based on selected layer */}
         <Subheader 
-          title={`Currently Showing: ${selectedLayer}`} 
+          title={`${selectedLayer}`} 
           description={layerDescriptions[selectedLayer] || 'No description available.'} 
         />
 

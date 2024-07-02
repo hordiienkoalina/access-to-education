@@ -3,11 +3,11 @@
 /* Styling for the header container */
 .header {
     background-color: #ffffff; /* White background color */
-    padding: 20px; /* Padding for spacing */
+    padding: 15px; /* Padding for spacing */
     text-align: left; /* Align text to the left */
     position: relative; /* Position relative to parent */
     z-index: 10; /* Ensure it stays above other content */
-    border-bottom: 1px solid #dcdcdc; /* Light gray border at the bottom */
+    border-bottom: 1px solid #848484; /* Light gray border at the bottom */
 }
 
 /* Styling for the h1 element within the header */

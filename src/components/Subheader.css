@@ -1,8 +1,8 @@
 /* Subheader.css - Styles for the subheader component */
 
 .subheader {
-    background-color: #ffffff; /* White background color */
-    padding: 5px; /* Adjust padding as needed */
+    background-color: #fafafa; /* White background color */
+    padding: 3px; /* Adjust padding as needed */
     text-align: left; /* Align text to the left */
     position: relative; /* Ensure it's not absolute or fixed */
     z-index: 10; /* Ensure it stays above other content */
@@ -10,16 +10,21 @@
 }
 
 .subheader h2 {
-    font-size: 18px; /* Font size for the subheader title */
-    color: #555; /* Dark gray color for the title */
+    font-size: 28px; /* Font size for the subheader title */
+    font-family: "Be Vietnam Pro", sans-serif;
+    color: #000000; /* Dark gray color for the title */
     margin: 0; /* Remove default margin */
     padding-left: 35px; /* Left padding for the title */
-    padding-bottom: -30px; /* Bottom padding for the title */
-    padding-top: 15px; /* Top padding for the title */
+    padding-bottom: 0; /* Bottom padding for the title */
+    padding-top: 5px; /* Top padding for the title */
 }
 
 .subheader p {
-    font-size: 14px; /* Font size for the description */
-    color: #777; /* Gray color for the description */
+    font-size: 16px; /* Font size for the description */
+    font-family: "IBM Plex Serif", serif;
+    color: #000000; /* Gray color for the description */
+    margin: 0; /* Remove default margin */
     padding-left: 35px; /* Left padding for the description */
-}  
+    padding-top: 5px; /* Top padding for the description */
+    padding-bottom: 10px; /* Bottom padding for the description */
+}

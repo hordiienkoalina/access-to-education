@@ -61,7 +61,7 @@ class Map extends Component {
       accessToken: mapboxgl.accessToken, // Access token for geocoder
       mapboxgl: mapboxgl, // Reference to mapboxgl library
       countries: 'br', // Limit search to Brazil
-      placeholder: 'Search', // Placeholder text in the search box
+      placeholder: 'Search for address or place...', // Placeholder text in the search box
       zoom: 10, // Zoom level when a search result is selected
       marker: false, // Do not add a marker for the search result
     });

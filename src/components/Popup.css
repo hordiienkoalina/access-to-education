@@ -14,7 +14,7 @@
   background: rgba(255, 255, 255, 1);
   padding: 20px;
   border-radius: 8px;
-  text-align: center;
+  text-align: left;
   max-height: 90vh; /* Ensure content doesn't exceed viewport height */
   overflow-y: auto; /* Allow scrolling if content overflows */
   position: relative;

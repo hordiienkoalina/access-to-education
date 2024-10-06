@@ -25,9 +25,23 @@
 /* Styling for the map geocoder control */
 .mapboxgl-ctrl-geocoder {
     height: 36px !important; /* Set a fixed height */
-    max-height: 36px !important; /* Ensure it does not exceed this height */
-    min-height: 36px !important; /* Ensure it does not shrink below this height */
-    font-size: 14px; /* Set font size */
+    font-size: 14px !important; /* Set font size */
+    width: 300px !important;
+    min-width: calc(100% - 20px);
+}
+
+.mapboxgl-ctrl-geocoder--input {
+    width: 100%;
+    height: 36px !important; /* Set a consistent height */
+    padding: 6px 35px !important; /* Adjust padding to maintain text position */
+    font-size: 16px; /* Consistent font size */
+    line-height: 24px; /* Maintain consistent line height */
+}
+
+/* Use !important only if absolutely necessary */
+.mapboxgl-ctrl-geocoder .mapboxgl-ctrl-geocoder--icon-search {
+    top: 25% !important;
+    left: 10px !important;
 }
 
 /* Styling for the map popup content */
@@ -124,14 +138,4 @@ background-color: #083d7f; /* Blue color */
 
 .progress-bar-female {
 background-color: #d41ac0; /* Pink color */
-}
-
-/* Temporary fix for search bar resizing on narrow window sizes */
-@media (max-width: 820px) {
-    .mapboxgl-ctrl-geocoder {
-        display: none !important; /* Hide the geocoder control on narrow screens */
-    }
-    .legend-container {
-        display: none !important; /* Hide the legend on narrow screens */
-    }
 }

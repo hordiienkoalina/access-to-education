@@ -6,8 +6,8 @@
     padding: 10px;
     border-radius: 12.5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    position: absolute;
-    bottom: 120px; 
+    position: fixed;
+    bottom: 60px; 
     right: 20px;
     z-index: 1;
     width: 240px;
@@ -27,4 +27,18 @@
     width: 100%;
     margin-top: 5px;
     font-size: 14px;
+}
+
+/* Temporary fix for search bar resizing on narrow window sizes */
+@media (max-width: 820px) {
+    .legend-container {
+        bottom: 110px; ; /* Hide the legend on narrow screens */
+    }
+}
+
+/* Temporary fix for search bar resizing on narrow window sizes */
+@media (max-width: 548px) {
+    .legend-container {
+        bottom: 150px; ; /* Hide the legend on narrow screens */
+    }
 }

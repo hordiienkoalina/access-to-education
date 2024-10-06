@@ -6,14 +6,14 @@
     justify-content: center; /* Center the buttons horizontally */
     position: fixed; /* Fix the position of the container */
     bottom: 60px; /* Position 60px from the bottom */
-    left: 210px; /* Position 210px from the left */
-    transform: translateX(-38%); /* Center the container horizontally */
-    z-index: 2; /* Ensure the container stays above other elements */
+    left: 20px; /* Position 210px from the left */
+    z-index: 99999; /* Ensure the container stays above other elements */
     background: rgba(255, 255, 255, 0.9); /* White background with slight transparency */
     border-radius: 12.5px; /* Rounded corners */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
-    padding: 0px 0px; /* No padding */
+    padding: 0px 0px;
     flex-wrap: nowrap; /* Prevent wrapping of flex items */
+    margin-right: 20px;
 }
 
 /* Styling for individual buttons */
@@ -41,4 +41,11 @@
     background-color: white; /* White background */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
     color: #333; /* Darker text color */
+}
+
+/* Adjust buttons layout for screen sizes less than 548px */
+@media (max-width: 548px) {
+    .overlay-buttons {
+        flex-wrap: wrap; /* Allow buttons to wrap to a new line */
+    }
 }

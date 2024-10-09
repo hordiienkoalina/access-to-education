@@ -1,7 +1,9 @@
 import React, { useState } from 'react'; // Import React library and useState hook
+import { useTranslation } from 'react-i18next'; // Import i18n translation hook
 import './OverlayButtons.css'; // Import CSS for overlay buttons
 
 function OverlayButtons({ onButtonClick, onLayerChange }) {
+    const { t } = useTranslation(); // Initialize translation hook
     const [activeButton, setActiveButton] = useState('Access-Quality'); // Initialize state for the active button
 
     const handleClick = (type) => {
@@ -15,40 +17,40 @@ function OverlayButtons({ onButtonClick, onLayerChange }) {
         className={`overlay-button ${activeButton === 'Access-Quality' ? 'active' : ''}`} 
         onClick={() => handleClick('Access-Quality')}
         >
-        Access-Quality
+        {t('overlayButtons.accessQuality')} {/* Translate button text */}
         </button>
         <button 
         className={`overlay-button ${activeButton === 'Quality' ? 'active' : ''}`} 
         onClick={() => handleClick('Quality')}
         >
-        Quality
+        {t('overlayButtons.quality')}
         </button>
         <button 
         className={`overlay-button ${activeButton === 'Access' ? 'active' : ''}`} 
         onClick={() => handleClick('Access')}
         >
-        Access
+        {t('overlayButtons.access')}
         </button>
         <button 
         className={`overlay-button ${activeButton === 'Income' ? 'active' : ''}`} 
         onClick={() => handleClick('Income')}
         >
-        Income
+        {t('overlayButtons.income')}
         </button>
         <button 
         className={`overlay-button ${activeButton === 'Gender' ? 'active' : ''}`} 
         onClick={() => handleClick('Gender')}
         >
-        Gender
+        {t('overlayButtons.gender')}
         </button>
         <button 
         className={`overlay-button ${activeButton === 'Race' ? 'active' : ''}`} 
         onClick={() => handleClick('Race')}
         >
-        Race
+        {t('overlayButtons.race')}
         </button>
     </div>
     );
 }
 
-export default OverlayButtons; // Export the OverlayButtons component as the default export
+export default OverlayButtons;

@@ -7,6 +7,8 @@ import Legend from './Legend';
 import { MAPBOX_ACCESS_TOKEN } from '../config/config';
 import './Map.css';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+import { withTranslation } from 'react-i18next';
+
 
 mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN; // Set the Mapbox access token
 
@@ -18,7 +20,7 @@ class Map extends Component {
       activeVariable: 'H_percentile',
       colorScales: this.initializeColorScales(),
       colors: this.initializeColorScales()['H_percentile'], // Set initial color scale
-      labels: ['Scarce', 'Adequate'], // Default labels
+      labels: [this.props.t('map.labels.scarce'), this.props.t('map.labels.adequate')], // Default labels
       selectedFeature: null,
       popup: null,
     };    
@@ -54,6 +56,7 @@ class Map extends Component {
 
   // Method to add map controls
   addMapControls = (map) => {
+    const { t } = this.props; // Deconstruct the t function from props
     // Add default navigation controls (zoom buttons)
     map.addControl(new mapboxgl.NavigationControl(), 'top-left');
 
@@ -61,7 +64,7 @@ class Map extends Component {
       accessToken: mapboxgl.accessToken, // Access token for geocoder
       mapboxgl: mapboxgl, // Reference to mapboxgl library
       countries: 'br', // Limit search to Brazil
-      placeholder: 'Search', // Placeholder text in the search box
+      placeholder: t('map.search'), // Placeholder text in the search box
       zoom: 10, // Zoom level when a search result is selected
       marker: false, // Do not add a marker for the search result
     });
@@ -89,18 +92,18 @@ class Map extends Component {
       this.handleMapClick(e); // Handle click event for municipality layer
     });
 
-    map.on('click', 'brazil-point-layer', (e) => {
-      console.log('Point layer clicked');
-      this.handleMapClick(e); // Handle click event for point layer
-    });
+    // map.on('click', 'brazil-point-layer', (e) => {
+    //   console.log('Point layer clicked');
+    //   this.handleMapClick(e); // Handle click event for point layer
+    // });
 
     map.on('click', 'brazil-polygon-layer-1', (e) => {
-      console.log('Polygon layer clicked');
+      console.log('Polygon layer 1 clicked');
       this.handleMapClick(e); // Handle click event for polygon layer
     });
 
     map.on('click', 'brazil-polygon-layer-2', (e) => {
-      console.log('Polygon layer clicked');
+      console.log('Polygon layer 2 clicked');
       this.handleMapClick(e); // Handle click event for polygon layer
     });
   };
@@ -109,6 +112,7 @@ class Map extends Component {
     const { activeVariable, colorScales } = this.state;
     const coordinates = e.lngLat;
     const properties = e.features[0].properties;
+    const { t } = this.props; // Destructure t from props for translations
   
     console.log('Active variable:', activeVariable);
     console.log('Properties of clicked feature:', properties);
@@ -117,11 +121,11 @@ class Map extends Component {
   
     if (activeVariable === 'majority_race') {
       const races = [
-        { name: 'White', percentage: properties.pct_white, colorClass: 'progress-bar-white' },
-        { name: 'Black', percentage: properties.pct_black, colorClass: 'progress-bar-black' },
-        { name: 'Indigenous', percentage: properties.pct_indigenous, colorClass: 'progress-bar-indigenous' },
-        { name: 'Asian', percentage: properties.pct_asian, colorClass: 'progress-bar-asian' },
-        { name: 'Parda', percentage: properties.pct_pardos, colorClass: 'progress-bar-pardos' }
+        { name: t('map.labels.white'), percentage: properties.pct_white, colorClass: 'progress-bar-white' },
+        { name: t('map.labels.black'), percentage: properties.pct_black, colorClass: 'progress-bar-black' },
+        { name: t('map.labels.indigenous'), percentage: properties.pct_indigenous, colorClass: 'progress-bar-indigenous' },
+        { name: t('map.labels.asian'), percentage: properties.pct_asian, colorClass: 'progress-bar-asian' },
+        { name: t('map.labels.parda'), percentage: properties.pct_pardos, colorClass: 'progress-bar-pardos' }
       ];
   
       races.sort((a, b) => (b.percentage || 0) - (a.percentage || 0));
@@ -135,20 +139,20 @@ class Map extends Component {
           </div>
         `;
       });
-
+  
       popupContent += `<div style="height: 5px;"></div>
       <div class="line-divider"></div>`;
-
+  
     } else if (activeVariable === 'pct_men_percentile') {
       const malePercentage = properties.pct_men !== undefined ? (properties.pct_men * 100).toFixed(1) : 'Data Unavailable';
       const femalePercentage = 1 - properties.pct_men !== undefined ? ([1 - properties.pct_men] * 100).toFixed(1) : 'Data Unavailable';
   
       popupContent += `
-        <p style="margin: 0; line-height: 2; color: #000;">${malePercentage}%<strong> Male</strong></p>
+        <p style="margin: 0; line-height: 2; color: #000;">${malePercentage}%<strong> ${t('map.labels.male')}</strong></p>
         <div class="progress-container">
           <div class="progress-bar progress-bar-male" style="width: ${properties.pct_men * 100}%;"></div>
         </div>
-        <p style="margin: 0; line-height: 2; color: #000;">${femalePercentage}%<strong> Female</strong> </p>
+        <p style="margin: 0; line-height: 2; color: #000;">${femalePercentage}%<strong> ${t('map.labels.female')}</strong> </p>
         <div class="progress-container">
           <div class="progress-bar progress-bar-female" style="width: ${[1 - properties.pct_men] * 100}%;"></div>
         </div>
@@ -168,58 +172,65 @@ class Map extends Component {
     if (activeVariable !== 'pct_men_percentile' && activeVariable !== 'majority_race') {
       const value = properties[activeVariable];
       if (value === undefined || isNaN(value)) {
-        popupContent += `<strong style="font-size: 16px; line-height: 2">Data Unavailable</strong>`;
+        popupContent += `<strong style="font-size: 16px; line-height: 2">${t('dataUnavailable')}</strong>`;
         popupContent += `<div class="line-divider"></div>`;
       } else {
         const percentileValue = properties[activeVariable];
         const percentage = Math.round(percentileValue * 100);
         const layerNameMap = {
-          'A_percentile': 'Access',
-          'Q_percentile': 'Quality',
-          'H_percentile': 'Access-Quality',
-          'P_percentile': 'Population',
-          'avg_monthly_earnings_percentile': 'Income',
-          'pct_men_percentile': 'Gender',
-          'majority_race': 'Race'
+          'A_percentile': t('overlayButtons.access'),
+          'Q_percentile': t('overlayButtons.quality'),
+          'H_percentile': t('overlayButtons.accessQuality'),
+          'P_percentile': t('overlayButtons.population'),
+          'avg_monthly_earnings_percentile': t('overlayButtons.income'),
+          'pct_men_percentile': t('overlayButtons.gender'),
+          'majority_race': t('overlayButtons.race')
         };
         const layerName = layerNameMap[activeVariable];
         const colorValue = this.getColorForValue(colorScales[activeVariable], percentileValue);
   
         const formatPercentileRank = (rank) => {
-          if (rank > 10 && rank < 20) return `${rank}th`;
+          if (rank > 10 && rank < 20) return `${rank}${t('map.numbering.th')}`;
           const lastDigit = rank % 10;
           switch (lastDigit) {
-            case 1: return `${rank}st`;
-            case 2: return `${rank}nd`;
-            case 3: return `${rank}rd`;
-            default: return `${rank}th`;
+            case 1: return `${rank}${t('map.numbering.st')}`;
+            case 2: return `${rank}${t('map.numbering.nd')}`;
+            case 3: return `${rank}${t('map.numbering.rd')}`;
+            default: return `${rank}${t('map.numbering.th')}`;
           }
         };
   
         const percentileRank = formatPercentileRank(percentage);
   
         popupContent += `<span class="color-box" style="background-color: ${colorValue};"></span>`;
-        popupContent += `<strong class="percentile-text">${percentileRank}</strong> <span class="percentile-text">${layerName} Percentile</span>`;
+        popupContent += `<strong class="percentile-text">${percentileRank}</strong> <span class="percentile-text">${t('map.percentileTemplate', {layerName: layerName })}</span>`;
         popupContent += `<div class="line-divider"></div>`;
       }
     }
   
-    if (censusTract) popupContent += `<p style="margin: 0px; line-height: 2;">Tract <strong>${censusTract}</strong></p>`;
+    if (censusTract) popupContent += `<p style="margin: 0px; line-height: 2;">${t('map.tract')} <strong>${censusTract}</strong></p>`;
     const locationLine = [cityName, stateName ? `${stateName} (${stateCode})` : null].filter(Boolean).join(', ');
     if (locationLine) popupContent += `<p style="margin: 0; line-height: 2;"><em>${locationLine}</em></p>`;
-    if (population) popupContent += `<p style="margin: 0; line-height: 2;"><strong># of Schoolchildren:</strong> ${population}</p>`;
-    if (avgMonthlyEarnings) popupContent += `<p style="margin: 0; line-height: 2;"><strong>Avg Monthly Income:</strong> R$${avgMonthlyEarnings} ≈ US$${avgMonthlyEarningsDollars}</p>`;
+    if (population) popupContent += `<p style="margin: 0; line-height: 2;"><strong>${t('map.schoolChildren')}:</strong> ${population}</p>`;
+    if (avgMonthlyEarnings) popupContent += `<p style="margin: 0; line-height: 2;"><strong>${t('map.monthlyIncome')}:</strong> R$${avgMonthlyEarnings} ≈ US$${avgMonthlyEarningsDollars}</p>`;
   
     popupContent += `</div></div>`;
   
+        // Create a new Popup instance
+        const newPopup = new mapboxgl.Popup({ closeButton: true })
+        .setLngLat(coordinates)
+        .setHTML(popupContent);
+
+    // Remove the previous popup if it exists
     if (this.state.popup) {
-      this.state.popup.remove();
+        this.state.popup.remove();
     }
-  
-    const newPopup = new mapboxgl.Popup({ closeButton: false })
-      .setLngLat(coordinates)
-      .setHTML(popupContent)
-      .addTo(this.state.map);
+
+    // Add the new popup to the map
+    newPopup.addTo(this.state.map);
+
+    // Update the state with the new popup
+    this.setState({ popup: newPopup, selectedFeature: e.features[0] });
   
     if (this.state.selectedFeature && this.state.selectedFeature.id === e.features[0].id) {
       this.setState({ selectedFeature: null, popup: null }, () => {
@@ -231,7 +242,8 @@ class Map extends Component {
         this.highlightFeature();
       });
     }
-  };  
+  };
+  
 
   // Method to format numbers with commas
   formatNumber = (num) => {
@@ -625,6 +637,8 @@ updateMapLayers = () => {
 };
 
   handleButtonClick = (type) => {
+    const { t } = this.props;  
+
     const variableMap = {
       Access: 'A_percentile',
       Quality: 'Q_percentile',
@@ -638,14 +652,15 @@ updateMapLayers = () => {
   
     // Define labels based on the active variable
     const labelsMap = {
-      'A_percentile': ['Poor', 'Adequate'],
-      'Q_percentile': ['Poor', 'Adequate'],
-      'H_percentile': ['Poor', 'Adequate'],
-      'P_percentile': ['Sparse', 'Dense'],
-      'avg_monthly_earnings_percentile': ['Low', 'High'],
-      'pct_men_percentile': ['Female', 'Male'],
-      'majority_race': ['White', 'Black', 'Indigenous', 'Asian', 'Parda'],
+      'A_percentile': [t('map.labels.poor'), t('map.labels.adequate')],
+      'Q_percentile': [t('map.labels.poor'), t('map.labels.adequate')],
+      'H_percentile': [t('map.labels.poor'), t('map.labels.adequate')],
+      'P_percentile': [t('map.labels.sparse'), t('map.labels.dense')],
+      'avg_monthly_earnings_percentile': [t('map.labels.low'), t('map.labels.high')],
+      'pct_men_percentile': [t('map.labels.female'), t('map.labels.male')],
+      'majority_race': [t('map.labels.white'), t('map.labels.black'), t('map.labels.indigenous'), t('map.labels.asian'), t('map.labels.parda')],
     };
+
     const newLabels = labelsMap[newActiveVariable];
   
     this.setState({
@@ -669,4 +684,4 @@ updateMapLayers = () => {
   }
 }  
 
-export default Map;
+export default withTranslation()(Map);

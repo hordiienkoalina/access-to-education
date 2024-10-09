@@ -1,0 +1,66 @@
+{
+    "Access": "Access",
+    "Quality": "Quality",
+    "Access-Quality": "Access-Quality",
+    "Income": "Income",
+    "Gender": "Gender",
+    "Race": "Race",
+    "noDescriptionAvailable": "No description available.",
+    "layerDescriptions": {
+      "Access": "The spatial access to public high schools, considering supply and demand of schools and student preferences.",
+      "Quality": "The quality of each school based on test scores and grade progression ratios.",
+      "AccessQuality": "The spatial access to high-quality public high schools, considering supply and demand of schools, student preferences, and school quality.",
+      "Income": "The monthly household earnings.",
+      "Gender": "The gender distribution of the population.",
+      "Race": "The racial distribution of the population."
+    },
+    "popup": {
+        "welcomeTitle": "Welcome to Atlas Educação",
+        "description1": "Access to education is commonly associated with the cost and proximity of a school. While these are crucial factors, other elements like resource availability, classroom capacity, and education quality are equally pivotal.",
+        "description2": "The Atlas Educação uses the Demographic Census and the School Census to highlight which areas have inadequate access to public secondary education. Use the map to explore every neighborhood in Brazil to see which have the most and the least access to high-quality public high schools.",
+        "dontShowAgain": "Don't show this again"
+      },
+    "overlayButtons": {
+        "accessQuality": "Access-Quality",
+        "quality": "Quality",
+        "access": "Access",
+        "income": "Income",
+        "gender": "Gender",
+        "race": "Race"
+      },
+    "header": {
+        "title": "Atlas Educação"
+      },
+    "footer": {
+    "methodology": "Methodology",
+    "downloadData": "Download Data"
+  },
+  "map":{
+    "search": "Search for address or place..",
+    "percentileTemplate": "{{layerName}} Percentile",
+    "schoolChildren": "Number of Schoolchildren",
+    "monthlyIncome": "Avg Monthly Income",
+    "tract": "Tract",
+    "labels": {
+        "poor": "Poor",
+        "adequate": "Adequate",
+        "scarce": "Scarce",
+        "dense": "Dense",
+        "low": "Low",
+        "high": "High",
+        "female": "Female",
+        "male": "Male",
+        "white": "White",
+        "black": "Black",
+        "indigenous": "Indigenous",
+        "asian": "Asian",
+        "parda": "Parda"
+      },
+    "numbering": {
+        "th":"th",
+        "st":"st",
+        "nd":"nd",
+        "rd":"rd"
+    }
+}
+  }

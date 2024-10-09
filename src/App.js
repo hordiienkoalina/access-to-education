@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import Map from './components/Map';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import Subheader from './components/Subheader';
-import Popup from './components/Popup'; // Import the Popup component
+import Popup from './components/Popup';
 import './App.css';
 
 const App = () => {
+  const { t, i18n } = useTranslation();
   const [selectedLayer, setSelectedLayer] = useState('Access-Quality');
-  const [isPopupVisible, setIsPopupVisible] = useState(false); // State for the popup visibility
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   const handleLayerChange = (layer) => {
     setSelectedLayer(layer);
@@ -19,35 +21,40 @@ const App = () => {
   };
 
   const layerDescriptions = {
-    'Access': 'The spatial access to public high schools, considering supply and demand of schools and student preferences.',
-    'Quality': 'The quality of each school based on test scores and grade progression ratios.',
-    'Access-Quality': 'The spatial access to high-quality public high schools, considering supply and demand of schools, student preferences, and school quality.',
-    'Income': 'The monthly household earnings.',
-    'Gender': 'The gender distribution of the population.',
-    'Race': 'The racial distribution of the population.',
+    'Access': t('layerDescriptions.Access'),
+    'Quality': t('layerDescriptions.Quality'),
+    'Access-Quality': t('layerDescriptions.AccessQuality'),
+    'Income': t('layerDescriptions.Income'),
+    'Gender': t('layerDescriptions.Gender'),
+    'Race': t('layerDescriptions.Race'),
   };
 
   useEffect(() => {
-    // Check local storage to determine if popup should be shown
     if (!localStorage.getItem('popupClosed')) {
       setIsPopupVisible(true);
     }
   }, []);
+
+
+  useEffect(() => {
+    const browserLanguage = i18n.language; // The detected language
+    console.log("Detected language: ", browserLanguage); // This will log the detected language (for debug purposes)
+  }, [i18n.language]);
 
   return (
     <div className="App">
       <Header />
       <div className="content">
         <Subheader 
-          title={`${selectedLayer}`} 
-          description={layerDescriptions[selectedLayer] || 'No description available.'} 
+          title={t(selectedLayer)} 
+          description={layerDescriptions[selectedLayer] || t('noDescriptionAvailable')} 
         />
         <div className="map-container">
           <Map onLayerChange={handleLayerChange} />
         </div>
       </div>
       <Footer />
-      {isPopupVisible && <Popup onClose={handleClosePopup} />} {/* Conditionally render the popup */}
+      {isPopupVisible && <Popup onClose={handleClosePopup} />}
     </div>
   );
 };

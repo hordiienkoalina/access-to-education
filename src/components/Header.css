@@ -24,6 +24,22 @@
     align-items: center; /* Center items vertically */
 }
 
+.language-buttons {
+    margin-left: auto; /* Push language buttons to the right */
+}
+
+.lang-button {
+    background: none; /* No background */
+    border: none; /* No border */
+    cursor: pointer; /* Pointer cursor */
+    margin: 0 5px; /* Margin between buttons */
+    font-size: 14px; /* Font size */
+}
+
+.lang-button:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
 /* Style for the logo image */
 .header-logo {
     width: 30px; /* Adjust size as needed */

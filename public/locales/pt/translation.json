@@ -1,0 +1,67 @@
+{
+  "Access": "Acesso",
+  "Quality": "Qualidade",
+  "Access-Quality": "Acesso-Qualidade",
+  "Income": "Renda",
+  "Gender": "Gênero",
+  "Race": "Raça",
+  "noDescriptionAvailable": "Nenhuma descrição disponível.",
+  "layerDescriptions": {
+    "Access": "O acesso espacial a escolas públicas de ensino médio, considerando a oferta e a demanda de escolas e as preferências dos alunos.",
+    "Quality": "A qualidade de cada escola com base em notas de testes e taxas de progressão de ano.",
+    "AccessQuality": "O acesso espacial a escolas públicas de ensino médio de alta qualidade, considerando a oferta e a demanda de escolas, preferências dos alunos e qualidade da escola.",
+    "Income": "Os rendimentos mensais das famílias.",
+    "Gender": "A distribuição de gênero da população.",
+    "Race": "A distribuição racial da população."
+  },
+  "popup": {
+    "welcomeTitle": "Bem-vindo ao Atlas Educação",
+    "description1": "O acesso à educação é comumente associado ao custo e à proximidade de uma escola. Embora esses sejam fatores cruciais, outros elementos, como disponibilidade de recursos, capacidade de sala de aula e qualidade da educação, são igualmente fundamentais.",
+    "description2": "O Atlas Educação utiliza o Censo Demográfico e o Censo Escolar para destacar quais áreas têm acesso inadequado à educação pública de ensino médio. Use o mapa para explorar cada bairro do Brasil e ver quais têm mais e menos acesso a escolas públicas de ensino médio de alta qualidade.",
+    "dontShowAgain": "Não mostrar isso novamente"
+  },
+  "overlayButtons": {
+    "accessQuality": "Acesso-Qualidade",
+    "quality": "Qualidade",
+    "access": "Acesso",
+    "income": "Renda",
+    "gender": "Gênero",
+    "race": "Raça"
+  },
+  "header": {
+    "title": "Atlas Educação"
+  },
+  "footer": {
+    "methodology": "Metodologia",
+    "downloadData": "Baixar Dados"
+  },
+  "map": {
+    "search": "Pesquisar por endereço ou lugar...",
+    "percentileTemplate": "Percentil de {{layerName}}",
+    "accessQuality": "Acesso-Qualidade",
+    "schoolChildren": "Número de Alunos",
+    "monthlyIncome": "Renda Mensal Média",
+    "tract": "Setor",
+    "labels": {
+      "poor": "Baixo",
+      "adequate": "Adequado",
+      "scarce": "Escasso",
+      "dense": "Denso",
+      "low": "Baixo",
+      "high": "Alto",
+      "female": "Feminino",
+      "male": "Masculino",
+      "white": "Branco",
+      "black": "Preto",
+      "indigenous": "Indígena",
+      "asian": "Asiático",
+      "parda": "Pardo"
+    },
+    "numbering": {
+        "th":"<sup>o</sup>",
+        "st":"<sup>o</sup>",
+        "nd":"<sup>o</sup>",
+        "rd":"<sup>o</sup>"
+    }
+  }
+}
